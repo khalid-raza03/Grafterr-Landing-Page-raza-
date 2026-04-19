@@ -1,0 +1,41 @@
+{
+    "hero": {
+        "headlinePrefix": "",
+        "headlineGradient": "",
+        "subheadline": "",
+        "CTA": "",
+        "decorative": "",
+        "shapes": ""
+    },
+
+    "featuresSection" :{
+        "title" :" ",
+        "titleAccent" : "",
+        "subtitle" : " ",
+        "products array" : [
+            {
+                "title": "Point of sale",
+                "img" : ""
+            },
+             {
+                "title": "Self-service",
+                "img" : ""
+            },
+             {
+                "title": "Kitchen management",
+                "img" : ""
+            }
+        ]
+        
+
+    },
+
+    "carousel" : {
+        "itemsPerView": {
+            "desktop": 3,
+            "tablet": 2,
+            "mobile": 1
+        },
+        "showArrows": true
+    }
+}

@@ -1,0 +1,62 @@
+/*Grafter design variables and reusable css */
+
+:root {
+    /* main color */
+    --primary-color: #1A1A1A;
+    --color-primary-blue:#5895F0;
+    --color-primary-yellow:#F1B662;
+    --background-color: #ffffff;
+    --text-color-secondary: #1A1A1ADD;
+    --text-color-tertiary: #777777;
+
+    /* Gradient colors */
+    --gradient-color: linear-gradient(90deg, var(--color-primary-blue) 0%, var(--color-primary-yellow) 100%);
+    
+
+}
+
+
+/* responsive container css */
+.responsive-container {
+  width: 100%;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .responsive-container {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-container {
+    max-width: 755px;
+  }
+}
+
+@media (min-width: 992px) {
+  .responsive-container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .responsive-container {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .responsive-container {
+    max-width: 1420px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .responsive-container {
+    max-width: 1580px;
+  }
+}
