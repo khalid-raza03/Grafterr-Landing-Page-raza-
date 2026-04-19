@@ -1,0 +1,83 @@
+.carouselWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 0 var(--spacing8);
+}
+
+.carouselTrack {
+  display: flex;
+  transition: transform 300ms ease;
+  will-change: transform;
+}
+
+.carouselItem {
+  flex-shrink: 0;
+  padding: 0 var(--spacing3);
+  box-sizing: border-box;
+}
+
+/* Arrows */
+.prevBtn,
+.nextBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: var(--secondary-color);
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  box-shadow: var(--card-shadow);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 200ms ease;
+}
+
+.prevBtn {
+  left: 0;
+}
+
+.nextBtn {
+  right: 0;
+}
+
+.prevBtn:disabled,
+.nextBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.arrowLeft {
+
+  width: 20px;
+  height: 20px;
+}
+
+.arrowRight {
+  width: 20px;
+    transform: rotate(180deg);
+  height: 20px;
+}
+
+/* Tablet - 2 items */
+@media (max-width: 1023px) {
+  .carouselWrapper {
+    padding: 0 var(--spacing6);
+  }
+}
+
+/* Mobile - 1 item, no arrow padding needed */
+@media (max-width: 767px) {
+  .carouselWrapper {
+    padding: 0;
+  }
+
+  .prevBtn,
+  .nextBtn {
+    display: none;
+  }
+}

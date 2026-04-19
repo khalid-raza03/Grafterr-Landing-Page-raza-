@@ -9,18 +9,18 @@
 }
 
 .blueShape {
-    position: absolute;
+  position: absolute;
   width: 45px;
   height: 45px;
-  top: 618px;
-  left: 280px;
+  top: 50%;
+  left: 10%;
 }
 
 .redShape {
  position: absolute;
   width: 25px;
   height: 25px;
-  top: 666px;
-  left: 1464px;
+  top: 50%;
+  right: 10%;
 
 }

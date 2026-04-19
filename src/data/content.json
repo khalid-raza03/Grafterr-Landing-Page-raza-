@@ -23,7 +23,7 @@
         "title" :"More ways  can help you grow your business ",
         "titleAccent" : "Grafterr",
         "subtitle" : "An award-winning, end-to-end restaurant technology & payments platform, designed to streamline food service and automate complex venue operations ",
-        "products array" : [
+        "products": [
             {
                 "title": "Point of sale",
                 "img" : "/images/carousel1.png"

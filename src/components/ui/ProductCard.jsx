@@ -1,14 +1,12 @@
 import React from 'react'
 import styles from './ProductCard.module.css'
 
-const ProductCard = () => {
+const ProductCard = ({ title, img }) => {
   return (
-    <>
     <div className={styles.productCard}>
-        <h3  className={styles.productTitle}>Point of sale</h3>
-        <img className={styles.productImg} src="./images/carousel1.png" alt="carousel-1"  />
+      <h3 className={styles.productTitle}>{title}</h3>
+      <img className={styles.productImg} src={img} alt={title} />
     </div>
-    </>
   )
 }
 

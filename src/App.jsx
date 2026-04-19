@@ -10,7 +10,7 @@ function App() {
 
       <div className="responsive-container">
           <HeroSection />
-          
+        
       </div>
      </div>
     </>

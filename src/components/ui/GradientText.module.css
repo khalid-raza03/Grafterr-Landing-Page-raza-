@@ -3,7 +3,15 @@ font-weight: var(--font-bold);
 font-size: var(--font-size-head);
 text-align: center;
 background: var(--gradient-color);
+line-height: var(--line-height-xl);
 background-clip: text;
 -webkit-background-clip: text;
 color: transparent;
+}
+
+@media screen and (max-width:1024px) {
+       .gradTxt {
+        font-size: var(--text-4xl);
+        line-height: var(--line-height-lg);
+       }
 }

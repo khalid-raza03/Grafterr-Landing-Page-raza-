@@ -10,3 +10,12 @@ font-size: var(--text-lg);
 text-align: center;
 
 }
+
+
+@media screen and (max-width:1024px) {
+    .btn{
+        width: 200px;
+        height: 45px;
+        font-size: var(--text-md);
+    }
+}
