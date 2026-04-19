@@ -1,13 +1,18 @@
 import { useState } from 'react'
-
-
+import styles from './App.module.css';
+import HeroSection from './components/sections/HeroSection';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-     <div>Test</div>
+     <div className={styles.mainWrapper}>
+
+      <div className="responsive-container">
+          <HeroSection />
+          
+      </div>
+     </div>
     </>
   )
 }

@@ -1,0 +1,12 @@
+.btn {
+  background: var(--gradient-color);
+  width: 320px;
+  height: 60px;
+  border-radius: 60px;
+  border: none;
+  color: var(--secondary-color);
+font-weight: var(--font-bold);
+font-size: var(--text-lg);
+text-align: center;
+
+}

@@ -1,0 +1,6 @@
+.mainWrapper{
+    min-height: 100vh;
+    background-color: var(--secondary-color);
+    padding: var(--spacing8) 0;
+    position: relative;
+}

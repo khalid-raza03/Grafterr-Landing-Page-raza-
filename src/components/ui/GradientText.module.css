@@ -1,0 +1,9 @@
+.gradTxt{
+font-weight: var(--font-bold);
+font-size: var(--font-size-head);
+text-align: center;
+background: var(--gradient-color);
+background-clip: text;
+-webkit-background-clip: text;
+color: transparent;
+}

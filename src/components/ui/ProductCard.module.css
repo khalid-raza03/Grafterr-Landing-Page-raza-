@@ -1,0 +1,30 @@
+.productCard {
+    position: relative;
+    
+    height: 700px;
+    width: 100%;
+    padding: var(--spacing3);
+    background-color: var(--tertiary-color);
+    box-shadow: var(--card-shadow);
+    border-radius: var(--border-radius-sm);
+}
+
+
+.productImg{
+    height: auto;
+    max-width: 100%;
+    object-fit: cover;
+    position: absolute;
+    bottom: 0;
+    right:0;
+}
+
+.productTitle{
+    font-family:var(--secondary-font);
+    font-weight: var(--font-bold);
+    font-size: var(--font-size-caption);
+    color: var(--text-color-primary);
+    text-align: left;
+    padding: var(--spacing4);
+
+}

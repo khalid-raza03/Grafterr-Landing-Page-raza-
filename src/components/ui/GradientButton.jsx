@@ -1,10 +1,11 @@
 import React from 'react'
+import styles from './GradientButton.module.css';
 
 function GradientButton() {
   return (
-    <div>
-      
-    </div>
+    <>
+      <button className={styles.btn}>Learn more</button>
+    </>
   )
 }
 

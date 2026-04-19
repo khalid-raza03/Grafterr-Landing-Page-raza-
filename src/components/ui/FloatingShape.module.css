@@ -1,0 +1,26 @@
+.shapeBox{
+
+}
+
+.image{
+    height: auto;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.blueShape {
+    position: absolute;
+  width: 45px;
+  height: 45px;
+  top: 618px;
+  left: 280px;
+}
+
+.redShape {
+ position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 666px;
+  left: 1464px;
+
+}
