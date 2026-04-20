@@ -3,6 +3,9 @@
   width: 100%;
   overflow-x: hidden;
   padding: var(--spacing5) 0;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .carouselTrack {
@@ -15,7 +18,7 @@
   display: flex;
   justify-content: center;
   flex-shrink: 0;
-  padding: 0 var(--spacing3);
+  padding: var(--spacing3) var(--spacing3);
   box-sizing: border-box;
 }
 
@@ -65,6 +68,8 @@
   height: 20px;
 }
 
+
+
 /* Tablet - 2 items */
 @media (max-width: 1023px) {
   .prevBtn {
@@ -87,8 +92,4 @@
   .nextBtn {
     display: none;
   }
-
-
 }
-
-

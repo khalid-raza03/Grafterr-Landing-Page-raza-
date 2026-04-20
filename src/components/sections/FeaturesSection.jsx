@@ -1,29 +1,63 @@
-import contentData from "../../data/content.json";
 import styles from "./FeaturesSection.module.css";
 import Carousel from "../ui/Carousel";
+import { CarouselSkeleton, FeatureSkeleton } from "../ui/Skeleton";
 
-const FeaturesSection = () => {
-  const { title, titleAccent, subtitle } = contentData.featuresSection;
+const FeaturesSection = ({
+  featuresData,
+  carouselData,
+  loading,
+  error,
+  onRetry,
+}) => {
+  if (loading) {
+    return (
+      <>
+        <div className="responsive-container">
+          <FeatureSkeleton />
+        </div>
+        <div className={styles.productSlider}>
+          <CarouselSkeleton items={3} />
+        </div>
+      </>
+    );
+  }
 
-  const hasAccentInTitle = title.includes(titleAccent);
-  const hasPlaceholderGap = /\s{2,}/.test(title);
+  if (error) {
+    return (
+      <div className="responsive-container">
+        <div className={styles.errorState}>
+          <p className={styles.errorText}>{error}</p>
+          <button type="button" className={styles.retryBtn} onClick={onRetry}>
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
-  let beforeAccent = title;
+  const { title, titleAccent, subtitle, products } = featuresData ?? {};
+
+  const safeTitle = title || "";
+  const safeTitleAccent = titleAccent || "";
+  const hasAccentInTitle = safeTitle.includes(safeTitleAccent);
+  const hasPlaceholderGap = /\s{2,}/.test(safeTitle);
+
+  let beforeAccent = safeTitle;
   let afterAccent = "";
 
   if (hasAccentInTitle) {
-    [beforeAccent, afterAccent] = title.split(titleAccent);
+    [beforeAccent, afterAccent] = safeTitle.split(safeTitleAccent);
   } else if (hasPlaceholderGap) {
-    [beforeAccent, afterAccent] = title.split(/\s{2,}/);
+    [beforeAccent, afterAccent] = safeTitle.split(/\s{2,}/);
   }
 
   return (
     <>
     <div className="responsive-container">
-   <div className={styles.wrapper}>     
+   <div className={`${styles.wrapper} ${styles.fadeIn}`}>     
       <h3 className={styles.subHeadline}>
         {beforeAccent}
-        <strong className={styles.titleAccent}>{titleAccent}</strong>
+        <strong className={styles.titleAccent}>{safeTitleAccent}</strong>
         {afterAccent}
       </h3>
 
@@ -35,7 +69,7 @@ const FeaturesSection = () => {
  
       <div className={styles.productSlider}>
        {/* product slider  */}
-      <Carousel />
+      <Carousel products={products ?? []} carouselConfig={carouselData} />
      </div>
     </>
   );

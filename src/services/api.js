@@ -1,5 +1,5 @@
-const MIN_DELAY = 800;
-const MAX_DELAY = 1600;
+const MIN_DELAY = 1000;
+const MAX_DELAY = 1500;
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 

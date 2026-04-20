@@ -3,14 +3,21 @@ import FloatingShape from "../ui/FloatingShape";
 import GradientText from "../ui/GradientText";
 import GradientButton from "../ui/GradientButton";
 import { HeroSkeleton } from "../ui/Skeleton";
-import useContent from "../../hooks/useContent";
 
-const HeroSection = () => {
-  const { data, loading, error } = useContent();
-  const heroData = data?.hero;
-
+const HeroSection = ({ heroData, loading, error, onRetry }) => {
   if (loading) return <HeroSkeleton />;
-  if (error) return <p>{error}</p>;
+  if (error) {
+    return (
+      <div className="responsive-container">
+        <div className={styles.errorState}>
+          <p className={styles.errorText}>{error}</p>
+          <button type="button" className={styles.retryBtn} onClick={onRetry}>
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const {
     headlinePrefix,
@@ -30,7 +37,7 @@ const HeroSection = () => {
 
   return (
     <div className="responsive-container">
-      <div className={styles.wrapper}>
+      <div className={`${styles.wrapper} ${styles.fadeIn}`}>
         <FloatingShape color={"red"} url={redShapeUrl} />
         <FloatingShape color={"blue"} url={blueShapeUrl} />
 
@@ -41,7 +48,7 @@ const HeroSection = () => {
 
         <p className={styles.subheadline}>
           {beforeHighlight}
-          {subheadline.includes(highlightedText) && (
+          {(subheadline || "").includes(highlightedText) && (
             <strong>{highlightedText}</strong>
           )}
           {afterHighlight}

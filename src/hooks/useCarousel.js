@@ -2,69 +2,135 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 // custom hook for carousel functionality
 
-const useCarousel = (items, itemsPerView) => {
+const useCarousel = (items, itemsPerView, options = {}) => {
+  const { circular = false } = options;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const touchX = useRef(null);
-  const touchX2 = useRef(null);
+  const touchStartX = useRef(null);
+  const touchStartY = useRef(null);
+  const touchCurrentX = useRef(null);
+  const touchCurrentY = useRef(null);
 
   const maxIndex = Math.max(0, items - itemsPerView);
+  const hasItems = items > 0;
 
   const goTo = useCallback(
     (index) => {
+      if (!hasItems) {
+        setCurrentIndex(0);
+        return;
+      }
+
+      if (circular) {
+        const wrappedIndex = ((index % items) + items) % items;
+        setCurrentIndex(wrappedIndex);
+        return;
+      }
+
       const clampedIndex = Math.max(0, Math.min(index, maxIndex));
       setCurrentIndex(clampedIndex);
     },
-    [maxIndex],
+    [circular, hasItems, items, maxIndex],
   );
 
   const next = useCallback(() => {
+    if (!hasItems) return;
+
+    if (circular) {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % items);
+      return;
+    }
+
     setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, maxIndex));
-  }, [maxIndex]);
+  }, [circular, hasItems, items, maxIndex]);
 
   const prev = useCallback(() => {
+    if (!hasItems) return;
+
+    if (circular) {
+      setCurrentIndex((prevIndex) => (prevIndex - 1 + items) % items);
+      return;
+    }
+
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  }, []);
+  }, [circular, hasItems, items]);
 
   //handles resposnive per view change
 
   useEffect(() => {
-    setCurrentIndex((prevIndex) =>
-      Math.min(prevIndex, Math.max(0, items - itemsPerView)),
-    );
-  }, [itemsPerView, items]);
+    if (!hasItems) {
+      setCurrentIndex(0);
+      return;
+    }
+
+    if (circular) {
+      setCurrentIndex((prevIndex) => ((prevIndex % items) + items) % items);
+      return;
+    }
+
+    setCurrentIndex((prevIndex) => Math.min(prevIndex, Math.max(0, items - itemsPerView)));
+  }, [circular, hasItems, itemsPerView, items]);
 
   //touh function
 
+  const resetTouch = useCallback(() => {
+    touchStartX.current = null;
+    touchStartY.current = null;
+    touchCurrentX.current = null;
+    touchCurrentY.current = null;
+  }, []);
+
   const handleTouchStart = useCallback((e) => {
-    touchX.current = e.touches[0].clientX;
-    touchX2.current = null;
+    const touch = e.touches?.[0];
+    if (!touch) return;
+
+    touchStartX.current = touch.clientX;
+    touchStartY.current = touch.clientY;
+    touchCurrentX.current = touch.clientX;
+    touchCurrentY.current = touch.clientY;
   }, []);
 
   const handleTouchMove = useCallback((e) => {
-    touchX2.current = e.touches[0].clientX;
+    const touch = e.touches?.[0];
+    if (!touch) return;
+
+    touchCurrentX.current = touch.clientX;
+    touchCurrentY.current = touch.clientY;
   }, []);
 
-  const handleTouchEnd = useCallback(() => {
-    if (touchX.current === null || touchX2.current === null) return;
+  const handleTouchEnd = useCallback((e) => {
+    if (touchStartX.current === null || touchStartY.current === null) {
+      resetTouch();
+      return;
+    }
 
-    const deltaX = touchX.current - touchX2.current;
-    const swipeThreshold = 50;
+    const endTouch = e.changedTouches?.[0];
+    const endX = endTouch?.clientX ?? touchCurrentX.current ?? touchStartX.current;
+    const endY = endTouch?.clientY ?? touchCurrentY.current ?? touchStartY.current;
 
-    if (deltaX > swipeThreshold) {
+    const deltaX = touchStartX.current - endX;
+    const deltaY = Math.abs(touchStartY.current - endY);
+    const swipeThreshold = 35;
+
+    // Ignore mostly vertical movement so page scroll stays natural.
+    if (deltaY > Math.abs(deltaX)) {
+      resetTouch();
+      return;
+    }
+
+    if (deltaX >= swipeThreshold) {
       next();
-    } else if (deltaX < -swipeThreshold) {
+    } else if (deltaX <= -swipeThreshold) {
       prev();
     }
 
-    touchX.current = null;
-    touchX2.current = null;
-  }, [next, prev]);
+    resetTouch();
+  }, [next, prev, resetTouch]);
 
     return {
         currentIndex,
         maxIndex,
-        goPrev : currentIndex > 0,
-        goNext : currentIndex < maxIndex,
+        goPrev : circular ? items > 1 : currentIndex > 0,
+        goNext : circular ? items > 1 : currentIndex < maxIndex,
         goTo,
         next,
         prev,

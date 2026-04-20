@@ -13,6 +13,7 @@
 
 ## Screenshots
 ![Project Screenshot](public/images/image.png)
+![Project Screenshot](public/images/image2.png)
 
 ## Technologies  
 - ReactJs 18

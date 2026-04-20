@@ -1,8 +1,7 @@
-
-.image{
-    height: auto;
-    max-width: 100%;
-    object-fit: cover;
+.image {
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
 }
 
 .blueShape {
@@ -14,33 +13,37 @@
 }
 
 .redShape {
- position: absolute;
+  position: absolute;
   width: 25px;
   height: 25px;
   top: 39%;
   right: 10%;
-
 }
 
-
-@media screen and (max-width:1024px) {
-  .redShape{
+@media screen and (max-width: 1024px) {
+  .redShape {
     top: 38%;
     right: 6%;
   }
 
-  .blueShape{
+  .blueShape {
     top: 30%;
     left: 6%;
   }
 }
 
-@media screen and (max-width:576px) {
-  .redShape{
-    top: 40%;
+@media screen and (max-width: 576px) {
+  .redShape {
+    top: 33%;
   }
 
-  .blueShape{
-    top: 30%;
+  .blueShape {
+    top: 26%;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .blueShape {
+    top: 28%;
   }
 }

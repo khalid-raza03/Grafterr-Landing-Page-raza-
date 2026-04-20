@@ -7,11 +7,14 @@ const useContent = () => {
   const [error, setError] = useState(null);
 
   const fetchedData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
     try {
       const response = await fetchAll();
       setData(response);
     } catch (err) {
-      setError(err?.message || "Falied to Load data");
+      setError(err?.message || "Failed to load data.");
     } finally {
       setLoading(false);
     }
