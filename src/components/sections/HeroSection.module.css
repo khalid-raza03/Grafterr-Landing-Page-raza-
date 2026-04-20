@@ -21,3 +21,34 @@
   text-align: center;
   margin-bottom: var(--spacing6);
 }
+
+
+@media screen and (max-width:1024px) {
+   .heading {
+        font-size: var(--text-4xl);
+        line-height: var(--line-height-lg);
+        margin-bottom: var(--spacing4);
+       }
+
+       .subheadline{
+                font-size: var(--text-lg);
+        line-height: var(--line-height-sm);
+        max-width: 500px;
+            margin-bottom: var(--spacing4);
+       }
+}
+
+@media screen and (max-width:767px) {
+   .heading {
+        font-size: var(--text-3xl);
+        line-height: var(--line-height-lg);
+        margin-bottom: var(--spacing3);
+       }
+
+       .subheadline{
+                font-size: var(--text-md);
+        line-height: var(--line-height-sm);
+        max-width: 300px;
+            margin-bottom: var(--spacing3);
+       }
+}

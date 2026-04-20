@@ -4,3 +4,9 @@
     padding: var(--spacingLarge) 0;
     position: relative;
 }
+
+@media screen and (max-width:1024px) {
+    .mainWrapper{
+        padding: var(--spacing6) 0;
+    }
+}

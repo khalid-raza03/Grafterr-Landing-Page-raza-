@@ -1,6 +1,6 @@
 .productCard {
   position: relative;
-  width: calc(300px + (600 - 300) * ((100vw - 320px) / (1800 - 360)));
+  width: calc(200px + (600 - 200) * ((100vw - 360px) / (1800 - 360)));
   aspect-ratio: 6 / 7;
   padding: var(--spacing3);
   background-color: var(--tertiary-color);
@@ -35,4 +35,32 @@
   color: var(--text-color-primary);
   text-align: left;
   padding: var(--spacing4);
+}
+
+
+@media screen and (max-width:1600px) {
+    .productCard{
+             aspect-ratio: 2/3;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .productTitle{
+          font-size: var(--text-2xl);
+    }
+
+     .productCard{
+             aspect-ratio: 0.65;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .productCard{
+        width: 80%;
+    }
+
+    
+     .productCard{
+             aspect-ratio: 0.75;
+    }
 }

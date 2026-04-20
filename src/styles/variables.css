@@ -26,7 +26,7 @@
     90deg,
     var(--secondary-color) 0px,
     var(--tertiary-color) 30px,
-    var(--text-color-tertiary) 60px
+    var(--secondary-bg) 60px
   );
 
   /* text specific css */
@@ -74,7 +74,7 @@
   --spacing6: 22px;
   --spacing7: 28px;
   --spacing6: 32px;
-  --spacing7: 36px;
+  --spacing7: 40px;
   --spacing8: 60px;
   --spacingLarge: 110px;
 }

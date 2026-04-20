@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useCarousel from '../../hooks/useCarousel';
 import useContent from '../../hooks/useContent';
 import ProductCard from './ProductCard';
+import { CarouselSkeleton } from './Skeleton';
 import styles from './Carousel.module.css';
 
 const getItemsPerView = (carouselConfig) => {
@@ -31,7 +32,7 @@ const Carousel = () => {
   const arrowUrl = data?.carousel?.url;
   const showArrows = data?.carousel?.showArrows;
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <CarouselSkeleton items={itemsPerView} />;
   if (error) return <p>{error}</p>;
 
   return (

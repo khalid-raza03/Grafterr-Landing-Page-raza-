@@ -17,8 +17,7 @@
 
 @media screen and (max-width: 1024px) {
   .btn {
-    width: 200px;
-    height: 45px;
+      padding: var(--spacing4) var(--spacing8);
     font-size: var(--text-md);
   }
 }

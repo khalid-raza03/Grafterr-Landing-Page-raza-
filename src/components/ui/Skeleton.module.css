@@ -37,21 +37,57 @@
   padding: var(--spacing8) 0;
 }
 
-
-
 .featuresSkeletonRow {
-    display: grid;
+  display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing4);
 }
 
-.rowSkeleton{
-    padding: var(--spacing2);
-    border-radius: var( --border-radius-sm);
+.rowSkeleton {
+  padding: var(--spacing2);
+  border-radius: var(--border-radius-sm);
+}
+
+/* carousel skeleton */
+.carouselSkeleton {
+  width: 100%;
+  padding: var(--spacing5) 0;
+}
+
+.carouselSkeletonTrack {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing3);
+}
+
+.carouselSkeletonCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing3);
+  padding: var(--spacing3);
+  min-height: clamp(320px, 42vw, 700px);
+  background-color: var(--tertiary-color);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--border-radius-sm);
+}
+
+.carouselSkeletonImage {
+  margin-top: auto;
+  border-radius: var(--border-radius-sm);
 }
 
 @media screen and (max-width:1024px) {
-      .featuresSkeletonRow{
-        grid-template-columns: 1fr;
-      }
+  .featuresSkeletonRow {
+    grid-template-columns: 1fr;
+  }
+
+  .carouselSkeletonTrack {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .carouselSkeletonTrack {
+    grid-template-columns: 1fr;
+  }
 }

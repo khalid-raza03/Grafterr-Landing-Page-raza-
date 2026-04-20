@@ -11,9 +11,9 @@
   will-change: transform;
 }
 
-
-
 .carouselItem {
+  display: flex;
+  justify-content: center;
   flex-shrink: 0;
   padding: 0 var(--spacing3);
   box-sizing: border-box;
@@ -23,7 +23,7 @@
 .prevBtn,
 .nextBtn {
   position: absolute;
-  top:102%;
+  top: 102%;
   transform: translateY(-50%);
   z-index: 10;
   background: var(--secondary-bg);
@@ -55,40 +55,40 @@
 }
 
 .arrowLeft {
-
   width: 20px;
   height: 20px;
 }
 
 .arrowRight {
   width: 20px;
-    transform: rotate(180deg);
+  transform: rotate(180deg);
   height: 20px;
 }
 
 /* Tablet - 2 items */
 @media (max-width: 1023px) {
-  .carouselWrapper {
-    padding: 0 var(--spacing6);
-  }
   .prevBtn {
-  left: 41%;
-}
+    left: 41%;
+  }
 
-.nextBtn {
-  right: 41%;
-}
-
+  .nextBtn {
+    right: 41%;
+  }
 }
 
 /* Mobile - 1 item, no arrow padding needed */
 @media (max-width: 767px) {
   .carouselWrapper {
     padding: 0;
+    padding-top: var(--spacing3);
   }
 
   .prevBtn,
   .nextBtn {
     display: none;
   }
+
+
 }
+
+
