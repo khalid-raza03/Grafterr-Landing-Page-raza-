@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useCarousel from '../../hooks/useCarousel';
 import ProductCard from './ProductCard';
 import styles from './Carousel.module.css';
@@ -22,13 +22,6 @@ const Carousel = ({ products = [], carouselConfig = {} }) => {
   const [itemsPerView, setItemsPerView] = useState(() =>
     getItemsPerView(itemsPerViewConfig)
   );
-  const [loopIndex, setLoopIndex] = useState(safeProducts.length);
-  const [isLoopResetting, setIsLoopResetting] = useState(false);
-
-  const touchStartX = useRef(null);
-  const touchStartY = useRef(null);
-  const touchCurrentX = useRef(null);
-  const touchCurrentY = useRef(null);
 
   useEffect(() => {
     const handleResize = () => setItemsPerView(getItemsPerView(itemsPerViewConfig));
@@ -40,15 +33,7 @@ const Carousel = ({ products = [], carouselConfig = {} }) => {
     itemsPerViewConfig.mobile,
   ]);
 
-  const isCircularLoop =
-    safeProducts.length > 0 && safeProducts.length <= itemsPerView;
-  const circularSlides = isCircularLoop
-    ? [...safeProducts, ...safeProducts, ...safeProducts]
-    : [];
-  const circularLength = safeProducts.length;
-  const circularCurrentIndex = circularLength
-    ? ((loopIndex % circularLength) + circularLength) % circularLength
-    : 0;
+  const isCircularLoop = safeProducts.length > 0 && safeProducts.length <= itemsPerView;
 
   const {
     currentIndex,
@@ -61,98 +46,20 @@ const Carousel = ({ products = [], carouselConfig = {} }) => {
     handleTouchEnd,
   } = useCarousel(safeProducts.length, itemsPerView, { circular: isCircularLoop });
 
-  useEffect(() => {
-    if (!isCircularLoop || circularLength === 0) return;
-
-    setIsLoopResetting(true);
-    setLoopIndex(circularLength);
-
-    const raf1 = requestAnimationFrame(() => {
-      const raf2 = requestAnimationFrame(() => setIsLoopResetting(false));
-      return () => cancelAnimationFrame(raf2);
-    });
-
-    return () => cancelAnimationFrame(raf1);
-  }, [isCircularLoop, circularLength, itemsPerView]);
-
-  const normalizeLoopIndex = () => {
-    if (!isCircularLoop || circularLength === 0) return;
-
-    let normalized = loopIndex;
-    if (loopIndex >= circularLength * 2) normalized = loopIndex - circularLength;
-    if (loopIndex < circularLength) normalized = loopIndex + circularLength;
-
-    if (normalized !== loopIndex) {
-      setIsLoopResetting(true);
-      setLoopIndex(normalized);
-      requestAnimationFrame(() =>
-        requestAnimationFrame(() => setIsLoopResetting(false))
-      );
-    }
-  };
-
-  const loopNext = () => {
-    if (circularLength <= 1) return;
-    setLoopIndex((prevValue) => prevValue + 1);
-  };
-
-  const loopPrev = () => {
-    if (circularLength <= 1) return;
-    setLoopIndex((prevValue) => prevValue - 1);
-  };
-
-  const resetTouch = () => {
-    touchStartX.current = null;
-    touchStartY.current = null;
-    touchCurrentX.current = null;
-    touchCurrentY.current = null;
-  };
-
-  const handleCircularTouchStart = (event) => {
-    const touch = event.touches?.[0];
-    if (!touch) return;
-
-    touchStartX.current = touch.clientX;
-    touchStartY.current = touch.clientY;
-    touchCurrentX.current = touch.clientX;
-    touchCurrentY.current = touch.clientY;
-  };
-
-  const handleCircularTouchMove = (event) => {
-    const touch = event.touches?.[0];
-    if (!touch) return;
-
-    touchCurrentX.current = touch.clientX;
-    touchCurrentY.current = touch.clientY;
-  };
-
-  const handleCircularTouchEnd = (event) => {
-    if (touchStartX.current === null || touchStartY.current === null) {
-      resetTouch();
-      return;
-    }
-
-    const endTouch = event.changedTouches?.[0];
-    const endX = endTouch?.clientX ?? touchCurrentX.current ?? touchStartX.current;
-    const endY = endTouch?.clientY ?? touchCurrentY.current ?? touchStartY.current;
-
-    const deltaX = touchStartX.current - endX;
-    const deltaY = Math.abs(touchStartY.current - endY);
-    const swipeThreshold = 35;
-
-    if (deltaY > Math.abs(deltaX)) {
-      resetTouch();
-      return;
-    }
-
-    if (deltaX >= swipeThreshold) {
-      loopNext();
-    } else if (deltaX <= -swipeThreshold) {
-      loopPrev();
-    }
-
-    resetTouch();
-  };
+  const visibleProducts = isCircularLoop
+    ? safeProducts.map((_, slotIndex) => {
+        const originalIndex = (currentIndex + slotIndex) % safeProducts.length;
+        return {
+          product: safeProducts[originalIndex],
+          originalIndex,
+          key: safeProducts[originalIndex]?.id ?? safeProducts[originalIndex]?.title ?? originalIndex,
+        };
+      })
+    : safeProducts.map((product, originalIndex) => ({
+        product,
+        originalIndex,
+        key: product?.id ?? product?.title ?? originalIndex,
+      }));
 
   return (
     <>
@@ -161,33 +68,23 @@ const Carousel = ({ products = [], carouselConfig = {} }) => {
         className={styles.carouselTrack}
         style={{
           transform: isCircularLoop
-            ? `translateX(-${loopIndex * (100 / itemsPerView)}%)`
+            ? "translateX(0)"
             : `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
-          transitionDuration: isCircularLoop && isLoopResetting
-            ? "0ms"
-            : `${transitionDuration}ms`,
+          transitionDuration: `${transitionDuration}ms`,
         }}
-        onTransitionEnd={isCircularLoop ? normalizeLoopIndex : undefined}
-        onTouchStart={isCircularLoop ? handleCircularTouchStart : handleTouchStart}
-        onTouchMove={isCircularLoop ? handleCircularTouchMove : handleTouchMove}
-        onTouchEnd={isCircularLoop ? handleCircularTouchEnd : handleTouchEnd}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
-        {(isCircularLoop ? circularSlides : safeProducts).map((product, index) => {
-          const originalIndex = isCircularLoop
-            ? index % circularLength
-            : index;
-          const productKey = product?.id ?? product?.title ?? index;
-
-          return (
+        {visibleProducts.map(({ product, originalIndex, key }, index) => (
           <div
-            key={`${productKey}-${index}`}
+            key={`${key}-${index}`}
             className={styles.carouselItem}
             style={{ minWidth: `${100 / itemsPerView}%` }}
           >
             <ProductCard title={product?.title} img={product?.img} index={originalIndex} />
           </div>
-          );
-        })}
+        ))}
       </div>
     </div>
     {showArrows && (
@@ -195,16 +92,16 @@ const Carousel = ({ products = [], carouselConfig = {} }) => {
           <button
             type="button"
             className={styles.prevBtn}
-            onClick={isCircularLoop ? loopPrev : prev}
-            disabled={isCircularLoop ? circularLength <= 1 : !goPrev}
+            onClick={prev}
+            disabled={!goPrev}
           >
             <img src={arrowUrl} alt="prev" className={styles.arrowLeft} />
           </button>
           <button
             type="button"
             className={styles.nextBtn}
-            onClick={isCircularLoop ? loopNext : next}
-            disabled={isCircularLoop ? circularLength <= 1 : !goNext}
+            onClick={next}
+            disabled={!goNext}
           >
             <img src={arrowUrl} alt="next" className={styles.arrowRight} />
           </button>
