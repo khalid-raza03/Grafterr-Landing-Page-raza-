@@ -33,7 +33,7 @@ const Carousel = ({ products = [], carouselConfig = {} }) => {
     itemsPerViewConfig.mobile,
   ]);
 
-  const isCircularLoop = safeProducts.length > 0 && safeProducts.length <= itemsPerView;
+  const isCircularLoop = carouselConfig.circular ?? false;
 
   const {
     currentIndex,
