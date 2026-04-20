@@ -11,10 +11,10 @@
         ],
         "decorativeShapes": [
          {
-          "red-shape" :"/images/shape-red"
+          "red-shape" :"/images/shape-red.png"
          },
          {
-          "blue-shape" :"/images/shape-blue"
+          "blue-shape" :"/images/shape-blue.png"
          }
         ] 
     },

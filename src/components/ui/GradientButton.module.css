@@ -1,21 +1,24 @@
 .btn {
   background: var(--gradient-color);
-  width: 320px;
-  height: 60px;
-  border-radius: 60px;
-  border: none;
+  padding: var(--spacing5) var(--spacingLarge);
+  border-radius: var(--border-radius-xl);
+  text-decoration: none;
   color: var(--secondary-color);
-font-weight: var(--font-bold);
-font-size: var(--text-lg);
-text-align: center;
-
+  font-weight: var(--font-bold);
+  font-size: var(--text-lg);
+  text-align: center;
+  cursor: pointer;
 }
 
+.btn:hover {
+    transform: scale(0.95) ;
+   transition: transform 0.5s ease-in-out;
+}
 
-@media screen and (max-width:1024px) {
-    .btn{
-        width: 200px;
-        height: 45px;
-        font-size: var(--text-md);
-    }
+@media screen and (max-width: 1024px) {
+  .btn {
+    width: 200px;
+    height: 45px;
+    font-size: var(--text-md);
+  }
 }

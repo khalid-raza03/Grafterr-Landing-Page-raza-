@@ -1,8 +1,8 @@
 .carouselWrapper {
   position: relative;
   width: 100%;
-  overflow: hidden;
-  padding: 0 var(--spacing8);
+  overflow-x: hidden;
+  padding: var(--spacing5) 0;
 }
 
 .carouselTrack {
@@ -10,6 +10,8 @@
   transition: transform 300ms ease;
   will-change: transform;
 }
+
+
 
 .carouselItem {
   flex-shrink: 0;
@@ -21,14 +23,15 @@
 .prevBtn,
 .nextBtn {
   position: absolute;
-  top: 50%;
+  top:102%;
   transform: translateY(-50%);
   z-index: 10;
-  background: var(--secondary-color);
+  background: var(--secondary-bg);
   border: none;
   border-radius: 50%;
-  width: 44px;
-  height: 44px;
+  width: 24px;
+  padding: var(--spacing6);
+  height: 24px;
   box-shadow: var(--card-shadow);
   cursor: pointer;
   display: flex;
@@ -38,11 +41,11 @@
 }
 
 .prevBtn {
-  left: 0;
+  left: 44%;
 }
 
 .nextBtn {
-  right: 0;
+  right: 44%;
 }
 
 .prevBtn:disabled,
@@ -68,6 +71,14 @@
   .carouselWrapper {
     padding: 0 var(--spacing6);
   }
+  .prevBtn {
+  left: 41%;
+}
+
+.nextBtn {
+  right: 41%;
+}
+
 }
 
 /* Mobile - 1 item, no arrow padding needed */

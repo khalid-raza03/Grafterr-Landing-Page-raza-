@@ -1,12 +1,12 @@
 import React from 'react'
 import styles from './GradientText.module.css'
 
-const GradientText = () => {
+const GradientText = ({children}) => {
   return (
     <>
-    <h1 className={styles.gradTxt}>
-        technology provider?
-      </h1>
+    <span className={styles.gradTxt}>
+        {children}
+      </span>
 </>
   )
 }

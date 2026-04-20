@@ -1,6 +1,3 @@
-.shapeBox{
-
-}
 
 .image{
     height: auto;
@@ -12,7 +9,7 @@
   position: absolute;
   width: 45px;
   height: 45px;
-  top: 50%;
+  top: 36%;
   left: 10%;
 }
 
@@ -20,7 +17,7 @@
  position: absolute;
   width: 25px;
   height: 25px;
-  top: 50%;
+  top: 39%;
   right: 10%;
 
 }

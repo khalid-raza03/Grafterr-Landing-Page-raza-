@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from './App.module.css';
 import HeroSection from './components/sections/HeroSection';
+import FeaturesSection from './components/sections/FeaturesSection';
 
 function App() {
 
@@ -8,8 +9,9 @@ function App() {
     <>
      <div className={styles.mainWrapper}>
 
-      <div className="responsive-container">
+      <div >
           <HeroSection />
+          <FeaturesSection />
         
       </div>
      </div>

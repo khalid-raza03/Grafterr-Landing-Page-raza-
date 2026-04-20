@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.heading {
+  font-size: var(--font-size-head);
+  line-height: var(--line-height-xl);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--spacing6);
+  text-align: center;
+}
+
+.subheadline {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-regular);
+  line-height: var(--line-height-md);
+  max-width: 700px;
+  text-align: center;
+  margin-bottom: var(--spacing6);
+}

@@ -13,6 +13,8 @@
   --text-color-primary: #000000;
   --text-color-secondary: #1a1a1add;
   --text-color-tertiary: #777777;
+  --secondary-bg:#DDDDDD;
+
 
   /* Gradient colors */
   --gradient-color: linear-gradient(
@@ -69,11 +71,12 @@
   --spacing3: 12px;
   --spacing4: 16px;
   --spacing5: 20px;
-  --spacing6: 24px;
+  --spacing6: 22px;
   --spacing7: 28px;
   --spacing6: 32px;
   --spacing7: 36px;
-  --spacing8: 40px;
+  --spacing8: 60px;
+  --spacingLarge: 110px;
 }
 
 /* responsive container css */

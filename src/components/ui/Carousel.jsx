@@ -35,6 +35,7 @@ const Carousel = () => {
   if (error) return <p>{error}</p>;
 
   return (
+    <>
     <div className={styles.carouselWrapper}>
       <div
         className={styles.carouselTrack}
@@ -49,12 +50,12 @@ const Carousel = () => {
             className={styles.carouselItem}
             style={{ minWidth: `${100 / itemsPerView}%` }}
           >
-            <ProductCard title={product.title} img={product.img} />
+            <ProductCard title={product.title} img={product.img} index={index} />
           </div>
         ))}
       </div>
-
-      {showArrows && (
+    </div>
+    {showArrows && (
         <>
           <button className={styles.prevBtn} onClick={prev} disabled={!goPrev}>
             <img src={arrowUrl} alt="prev" className={styles.arrowLeft} />
@@ -64,7 +65,7 @@ const Carousel = () => {
           </button>
         </>
       )}
-    </div>
+    </>
   );
 };
 

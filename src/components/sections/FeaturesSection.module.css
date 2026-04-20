@@ -1,0 +1,37 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: calc(var(--spacingLarge) );
+}
+
+.subHeadline {
+  font-size: var(--font-size-subHead);
+  color: var(--primary-color);
+  font-weight: var(--font-semibold);
+  line-height: var(--line-height-lg);
+  margin-bottom: var(--spacing6);
+  text-align: center;
+  word-spacing: 1px;
+  max-width: 900px;
+}
+
+.titleAccent {
+  color: var(--text-color-tertiary);
+  margin: 0 6px;
+}
+
+.subtitle {
+  font-weight: var(--font-regular);
+  font-size: var(--font-size-subTitle);
+  color: var(--text-color-tertiary);
+  line-height: var(--line-height-sm);
+  max-width: 980px;
+  text-align: center;
+  margin-bottom: var(--spacing6);
+}
+
+.productSlider {
+  padding-left: var(--spacingLarge);
+}
